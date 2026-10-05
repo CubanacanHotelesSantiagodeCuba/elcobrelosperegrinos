@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complejo Turístico El Cobre – Los Peregrinos | Cubanacán</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul-900:#04173a;
+    --azul-800:#062a5e;
+    --azul-700:#0a3d7d;
+    --azul-600:#0f5199;
+    --azul-500:#1668bf;
+    --dorado:#e6b951;
+    --dorado-claro:#f6d98a;
+    --blanco:#ffffff;
+    --texto:#eaf2fb;
+    --texto-suave:#b9cde6;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Open Sans',sans-serif;
+    color:var(--texto);
+    background:
+      radial-gradient(circle at 15% 10%, #0d4a92 0%, transparent 55%),
+      radial-gradient(circle at 85% 85%, #0a3d7d 0%, transparent 55%),
+      linear-gradient(160deg, var(--azul-900) 0%, var(--azul-800) 40%, #02102a 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    position:relative;
+    overflow-x:hidden;
+    line-height:1.7;
+  }
+
+  /* ===== MARCA DE AGUA ===== */
+  .marca-agua{
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+    z-index:0;
+  }
+  .marca-agua img{
+    width:min(70vw, 780px);
+    max-width:90%;
+    opacity:0.055;
+    filter:grayscale(100%) brightness(200%);
+    user-select:none;
+  }
+  .marca-agua::after{
+    content:"CUBANACÁN";
+    position:absolute;
+    font-family:'Playfair Display',serif;
+    font-size:min(16vw,180px);
+    letter-spacing:.25em;
+    color:#ffffff;
+    opacity:.022;
+    font-weight:700;
+    white-space:nowrap;
+  }
+
+  /* ===== CONTENIDO ===== */
+  .contenido{
+    position:relative;
+    z-index:2;
+    max-width:1150px;
+    margin:0 auto;
+    padding:0 20px 70px;
+  }
+
+  /* ===== HEADER ===== */
+  header{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:45px 20px 30px;
+  }
+  .logo-cubanacan{
+    width:230px;
+    max-width:70%;
+    filter:drop-shadow(0 6px 22px rgba(0,0,0,.6));
+    margin-bottom:18px;
+  }
+  .linea-dorada{
+    width:120px;height:3px;margin:18px auto;
+    background:linear-gradient(90deg,transparent,var(--dorado),transparent);
+    border-radius:3px;
+  }
+  .pais{
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(230,185,81,.35);
+    border-radius:60px;
+    padding:8px 22px 8px 10px;
+    backdrop-filter:blur(6px);
+    margin-top:6px;
+  }
+  .pais img{
+    height:46px;width:46px;object-fit:cover;border-radius:50%;
+    border:2px solid var(--dorado);
+  }
+  .pais span{
+    font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--dorado-claro);font-weight:600;
+  }
+
+  /* ===== TITULARES ===== */
+  .categoria{
+    display:inline-block;
+    background:linear-gradient(135deg,var(--dorado),#c99a2e);
+    color:#04173a;
+    font-weight:700;
+    font-size:.72rem;
+    letter-spacing:.2em;
+    padding:7px 20px;
+    border-radius:30px;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.9rem,5.2vw,3.4rem);
+    line-height:1.15;
+    color:var(--blanco);
+    text-shadow:0 4px 24px rgba(0,0,0,.55);
+  }
+  h1 .destacado{
+    color:var(--dorado);
+    display:block;
+    font-size:.55em;
+    letter-spacing:.18em;
+    margin-top:10px;
+    text-transform:uppercase;
+  }
+  .estrellas{
+    margin-top:16px;
+    font-size:1.5rem;
+    color:var(--dorado);
+    letter-spacing:.22em;
+    text-shadow:0 0 18px rgba(230,185,81,.6);
+  }
+  .estrellas small{
+    display:block;
+    color:var(--texto-suave);
+    font-size:.72rem;
+    letter-spacing:.3em;
+    margin-top:6px;
+    text-transform:uppercase;
+  }
+
+  .intro{
+    max-width:820px;
+    margin:30px auto 0;
+    font-size:1.03rem;
+    color:var(--texto);
+    font-weight:300;
+    text-align:center;
+  }
+
+  /* ===== SECCIONES ===== */
+  section{
+    margin-top:52px;
+    background:rgba(4,23,58,.55);
+    border:1px solid rgba(120,170,230,.18);
+    border-radius:20px;
+    padding:34px 30px;
+    backdrop-filter:blur(8px);
+    box-shadow:0 18px 50px rgba(0,0,0,.35);
+  }
+  h2{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.25rem,3vw,1.75rem);
+    color:var(--dorado);
+    margin-bottom:8px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  h2 .ico{font-size:1.15em;}
+  .sub-raya{
+    width:70px;height:2px;background:var(--dorado);opacity:.6;
+    margin:12px 0 20px;border-radius:2px;
+  }
+  h3{
+    font-size:1rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--dorado-claro);
+    margin:26px 0 12px;
+    font-weight:600;
+  }
+  p{margin-bottom:14px;color:var(--texto);font-weight:300;}
+  ul{list-style:none;margin:0 0 10px;}
+  li{
+    position:relative;
+    padding-left:26px;
+    margin-bottom:9px;
+    color:var(--texto);
+    font-weight:300;
+  }
+  li::before{
+    content:"";
+    position:absolute;
+    left:4px;top:11px;
+    width:8px;height:8px;
+    background:var(--dorado);
+    border-radius:50%;
+    box-shadow:0 0 10px rgba(230,185,81,.8);
+  }
+
+  /* ===== TARJETAS ===== */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:18px;
+    margin-top:6px;
+  }
+  .tarjeta{
+    background:linear-gradient(150deg, rgba(15,81,153,.55), rgba(4,23,58,.75));
+    border:1px solid rgba(120,170,230,.22);
+    border-left:4px solid var(--dorado);
+    border-radius:14px;
+    padding:20px 22px;
+    transition:.3s;
+  }
+  .tarjeta:hover{
+    transform:translateY(-5px);
+    border-color:var(--dorado);
+    box-shadow:0 14px 34px rgba(0,0,0,.45);
+  }
+  .tarjeta h4{
+    color:var(--blanco);
+    font-size:1.02rem;
+    margin-bottom:8px;
+    font-weight:600;
+  }
+  .tarjeta p{font-size:.92rem;margin:0;color:var(--texto-suave);}
+  .num{
+    font-family:'Playfair Display',serif;
+    font-size:2.4rem;
+    color:var(--dorado);
+    line-height:1;
+    display:block;
+    margin-bottom:4px;
+  }
+
+  /* ===== SERVICIOS ===== */
+  .servicios{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;
+  }
+  .chip{
+    background:rgba(230,185,81,.12);
+    border:1px solid rgba(230,185,81,.4);
+    color:var(--dorado-claro);
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:.85rem;
+    font-weight:400;
+  }
+  .chip::before{content:"✓ ";font-weight:700;}
+
+  /* ===== GALERÍA ===== */
+  .galeria{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:14px;
+    margin-top:14px;
+  }
+  .galeria figure{
+    overflow:hidden;
+    border-radius:14px;
+    border:1px solid rgba(120,170,230,.25);
+    position:relative;
+    aspect-ratio:4/3;
+    background:#02102a;
+  }
+  .galeria img{
+    width:100%;height:100%;object-fit:cover;
+    display:block;
+    transition:transform .6s ease, filter .6s ease;
+    filter:saturate(1.05);
+  }
+  .galeria figure:hover img{transform:scale(1.09);filter:saturate(1.25) brightness(1.05);}
+  .galeria figcaption{
+    position:absolute;bottom:0;left:0;right:0;
+    padding:22px 14px 12px;
+    font-size:.8rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#fff;
+    background:linear-gradient(transparent, rgba(4,23,58,.92));
+  }
+
+  /* ===== CONTACTO ===== */
+  .contacto-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;
+    margin-top:10px;
+  }
+  .contacto-item{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(120,170,230,.2);
+    border-radius:14px;
+    padding:20px;
+    text-align:center;
+  }
+  .contacto-item .ico{font-size:1.6rem;display:block;margin-bottom:8px;}
+  .contacto-item strong{display:block;color:var(--dorado);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px;}
+  .contacto-item a, .contacto-item span{color:var(--blanco);text-decoration:none;font-size:1rem;font-weight:600;}
+  .contacto-item a:hover{color:var(--dorado);}
+
+  /* ===== REDES ===== */
+  .redes{
+    display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:18px;
+  }
+  .btn-red{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:13px 26px;
+    border-radius:40px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:.9rem;
+    color:#fff;
+    background:linear-gradient(135deg,var(--azul-600),var(--azul-500));
+    border:1px solid rgba(255,255,255,.22);
+    transition:.3s;
+    box-shadow:0 8px 22px rgba(0,0,0,.35);
+  }
+  .btn-red:hover{
+    transform:translateY(-3px);
+    background:linear-gradient(135deg,var(--dorado),#c99a2e);
+    color:#04173a;
+    border-color:var(--dorado);
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:40px 20px 30px;
+    border-top:1px solid rgba(120,170,230,.18);
+    margin-top:60px;
+  }
+  footer img{width:150px;opacity:.85;margin-bottom:12px;}
+  footer p{font-size:.82rem;color:var(--texto-suave);margin:0;letter-spacing:.08em;}
+
+  @media(max-width:600px){
+    section{padding:26px 18px;border-radius:16px;}
+    header{padding:30px 14px 20px;}
+    .logo-cubanacan{width:180px;}
+    .marca-agua img{width:120vw;}
+  }
+</style>
+</head>
+<body>
+
+<!-- MARCA DE AGUA -->
+<div class="marca-agua" aria-hidden="true">
+  <img src="https://i.postimg.cc/RFJTTW60/logocubanacan.jpg" alt="">
+</div>
+
+<!-- HEADER -->
+<header>
+  <img class="logo-cubanacan" src="https://i.postimg.cc/RFJTTW60/logocubanacan.jpg" alt="Cubanacán">
+  <div class="linea-dorada"></div>
+
+  <span class="categoria">Categoría del Complejo Turístico</span>
+  <h1>
+    El Cobre – Los Peregrinos
+    <span class="destacado">Complejo Turístico</span>
+  </h1>
+  <div class="estrellas">
+    ★★★★
+    <small>4 Estrellas</small>
+  </div>
+
+  <div class="pais">
+    <img src="https://i.postimg.cc/FRkxxYdR/marcapatria.jpg" alt="Marca País Cuba">
+    <span>Marca País · Cuba</span>
+  </div>
+
+  <p class="intro">
+    El Complejo Turístico Cobre-Los Peregrinos se beneficia de un entorno que combina profundo valor
+    religioso, patrimonio histórico-minero y un paisaje natural privilegiado, factores que lo convierten
+    en un destino singular para el turismo cultural, de peregrinación y de naturaleza.
+  </p>
+</header>
+
+<div class="contenido">
+
+  <!-- EPICENTRO RELIGIOSO -->
+  <section>
+    <h2><span class="ico">⛪</span> Epicentro religioso y patrimonial</h2>
+    <div class="sub-raya"></div>
+    <p>
+      El principal atractivo es su cercanía al <strong>Santuario Nacional de Nuestra Señora de la Virgen de la
+      Caridad del Cobre</strong>, Patrona de Cuba. El hotel <strong>Los Peregrinos</strong> se encuentra a
+      <strong>1–2 km</strong> del Santuario, en la entrada del poblado, mientras que el hotel
+      <strong>El Cobre</strong> está a solo <strong>500 metros</strong>, ideal para los peregrinos.
+    </p>
+    <p>
+      El paisaje cultural de El Cobre fue declarado <strong>Monumento Nacional en 2013</strong> y se prepara un
+      expediente para su posible reconocimiento como <strong>Patrimonio de la Humanidad por la UNESCO</strong>.
+    </p>
+  </section>
+
+  <!-- ENTORNO NATURAL -->
+  <section>
+    <h2><span class="ico">🏞️</span> Entorno natural y minero</h2>
+    <div class="sub-raya"></div>
+    <p>El complejo está custodiado por la <strong>Sierra Maestra</strong> y rodeado de un entorno natural de gran belleza. El paisaje circundante incluye:</p>
+    <ul>
+      <li><strong>Las antiguas minas de cobre:</strong> las primeras a cielo abierto de América, explotadas desde el siglo XVII.</li>
+      <li><strong>La Laguna Azul:</strong> un reservorio natural de aguas color turquesa, de unos 750 m de largo.</li>
+      <li><strong>Cerro del Cardenillo:</strong> desde donde se puede apreciar el amanecer con el lago como telón de fondo.</li>
+      <li><strong>Cafetales franceses en ruinas</strong> y el sendero a la <strong>Piedra del Espejo</strong>.</li>
+    </ul>
+
+    <div class="galeria">
+      <figure><img src="https://i.postimg.cc/y8WnNp1v/cobre1.jpg" alt="Entorno Natural"><figcaption>1 - Entorno Natural</figcaption></figure>
+      <figure><img src="https://i.postimg.cc/XYTKYVDY/cobre2.jpg" alt="Área de Descanso"><figcaption>2 - Área de Descanso</figcaption></figure>
+      <figure><img src="https://i.postimg.cc/fLsxY8sW/cobre3.jpg" alt="Fachada del Hotel El Cobre"><figcaption>3 - Fachada del Hotel El Cobre</figcaption></figure>
+      <figure><img src="https://i.postimg.cc/1zGFRDqk/cobre4.jpg" alt="Pasillos"><figcaption>4 - Pasillos</figcaption></figure>
+      <figure><img src="https://i.postimg.cc/BbVL7gdV/cobre5.jpg" alt="Dormitorios"><figcaption>5 - Dormitorios</figcaption></figure>
+      <figure><img src="https://i.postimg.cc/VLJbrxtM/cobre6.jpg" alt="Dormitorios"><figcaption>6 - Dormitorios</figcaption></figure>
+      <figure><img src="https://i.postimg.cc/d1T8CDD6/Screenshot-20261003-051449.jpg" alt="Ranchón Los Peregrinos"><figcaption>7 - Ranchón Los Peregrinos</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- TURISMO -->
+  <section>
+    <h2><span class="ico">🎭</span> Ideal para el turismo cultural y de peregrinación</h2>
+    <div class="sub-raya"></div>
+    <p>
+      Las autoridades locales destacan que El Cobre es ideal para el turismo cultural, social y de naturaleza,
+      en un ambiente hospitalario. La zona concentra el <strong>27% de los recursos declarados Patrimonio de la
+      Humanidad en Cuba</strong> y busca desarrollar la idea del peregrinaje, similar a los Caminos de Santiago
+      en España.
+    </p>
+  </section>
+
+  <!-- UBICACIÓN -->
+  <section>
+    <h2><span class="ico">📍</span> Ubicación estratégica</h2>
+    <div class="sub-raya"></div>
+    <div class="grid">
+      <div class="tarjeta">
+        <span class="num">22 km</span>
+        <h4>Al oeste de Santiago de Cuba</h4>
+        <p>Fácil acceso desde la ciudad.</p>
+      </div>
+      <div class="tarjeta">
+        <span class="num">1.8 km</span>
+        <h4>Monumento al Cimarrón</h4>
+        <p>Uno de los sitios históricos cercanos.</p>
+      </div>
+      <div class="tarjeta">
+        <span class="num">15 km</span>
+        <h4>Parque Céspedes</h4>
+        <p>En el centro histórico de Santiago.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTILO Y HABITACIONES -->
+  <section>
+    <h2><span class="ico">🏨</span> Estilo del Hotel</h2>
+    <div class="sub-raya"></div>
+    <div class="servicios">
+      <span class="chip">Económico</span>
+      <span class="chip">Negocios</span>
+    </div>
+
+    <h3>Habitaciones</h3>
+    <div class="grid">
+      <div class="tarjeta">
+        <span class="num">18</span>
+        <h4>Hotel El Cobre</h4>
+        <p>Habitaciones disponibles.</p>
+      </div>
+      <div class="tarjeta">
+        <span class="num">8</span>
+        <h4>Hotel Los Peregrinos</h4>
+        <p>Habitaciones disponibles.</p>
+      </div>
+    </div>
+
+    <h3>Tipos de habitación</h3>
+    <ul>
+      <li>Habitación Estándar Doble</li>
+      <li>Habitación Estándar de uso individual</li>
+    </ul>
+
+    <h3>Servicios de habitación</h3>
+    <div class="servicios">
+      <span class="chip">Aire acondicionado</span>
+      <span class="chip">Baño adicional</span>
+      <span class="chip">Mesa de escritorio</span>
+      <span class="chip">Servicio de limpieza</span>
+      <span class="chip">Minibar</span>
+      <span class="chip">TV por cable o satélite</span>
+      <span class="chip">Televisor de pantalla plana</span>
+      <span class="chip">Bañera / ducha</span>
+    </div>
+  </section>
+
+  <!-- OFERTAS Y PAGOS -->
+  <section>
+    <h2><span class="ico">🍽️</span> Ofertas disponibles</h2>
+    <div class="sub-raya"></div>
+    <p><strong>Servicios Gastronómicos</strong> en el Ranchón Los Peregrinos en El Cobre.</p>
+
+    <h3>Métodos de pago</h3>
+    <div class="servicios">
+      <span class="chip">Transferencia</span>
+      <span class="chip">Efectivo</span>
+      <span class="chip">Otros</span>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section>
+    <h2><span class="ico">📞</span> Para más información y reservas</h2>
+    <div class="sub-raya"></div>
+    <div class="contacto-grid">
+      <div class="contacto-item">
+        <span class="ico">☎️</span>
+        <strong>Teléfono</strong>
+        <a href="tel:022346768">(022) 346768</a>
+      </div>
+      <div class="contacto-item">
+        <span class="ico">💬</span>
+        <strong>WhatsApp</strong>
+        <a href="https://wa.me/5363279552" target="_blank" rel="noopener">63279552</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REDES -->
+  <section>
+    <h2><span class="ico">🌐</span> Síguenos en nuestras redes sociales</h2>
+    <div class="sub-raya"></div>
+    <div class="redes">
+      <a class="btn-red" href="https://www.facebook.com/share/1EyibJRqgB/" target="_blank" rel="noopener">
+        📘 Facebook
+      </a>
+      <a class="btn-red" href="https://instagram.com/hotel_el_cobre?stkn=MXQ1MnN2azZhdHVmaQ%3D%3D" target="_blank" rel="noopener">
+        📷 Instagram
+      </a>
+      <a class="btn-red" href="https://www.tripadvisor.es/Hotel_Review-g1916207-d23317743-Reviews-Hotel_El_Cobre-El_Cobre_Santiago_de_Cuba_Province_Cuba.html" target="_blank" rel="noopener">
+        ⭐ Tripadvisor
+      </a>
+    </div>
+
+    <h3 style="text-align:center;margin-top:30px;">Reseñas</h3>
+    <p style="text-align:center;">
+      Si deseas dejar tu experiencia puedes encontrarnos en <strong>Tripadvisor</strong>.
+    </p>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://i.postimg.cc/FRkxxYdR/marcapatria.jpg" alt="Marca País Cuba">
+  <p>Complejo Turístico El Cobre – Los Peregrinos · Cubanacan · Santiago de Cuba</p>
+</footer>
+
+</body>
+</html>
